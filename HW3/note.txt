@@ -1,0 +1,59 @@
+'''
+學習下列兩個模組
+csv 
+
+import csv
+
+# 開啟 CSV 檔案
+with open('iris.csv', newline='') as csvfile:
+
+  # 讀取 CSV 檔案內容
+  rows = csv.reader(csvfile)
+
+  # 以迴圈輸出每一列
+  for row in rows:
+    print(row)
+
+
+更多資料-->https://blog.gtwang.org/programming/python-csv-file-reading-and-writing-tutorial/
+
+###
+prettytable
+
+
+import prettytable as pt
+
+from prettytable import from_csv 
+fp = open("mytable.csv", "r") 
+pt = from_csv(fp) 
+fp.close()
+
+增加行的辦法
+	pt.add_row([])
+	
+	[]內放"項目"+數據
+	e.g.
+	["白癡",12,13,13]
+	
+	實現方法
+	
+	pt.add_row(["白癡",12,13,13])
+
+增加列的辦法
+
+	pt.add_column("項目",[])
+	
+	看你要放哪一科的數據，比方說數學，那"項目"-->"數學"
+
+	[]內放那一列的數據
+	
+	pt.add_column("白癡",[12,13,13])
+	
+更多介紹-->https://blog.csdn.net/codeway3D/article/details/52798804
+https://www.cnblogs.com/xiao-apple36/p/9115629.html
+	
+###
+
+###
+Python 取道小數點兩位的實現方法
+round(x+0.01,2)
