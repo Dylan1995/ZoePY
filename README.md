@@ -6,7 +6,7 @@ Tutorial for learning django
   2. func & class
 09/17   
   3. import & pkg & file & csv
-  hw3
+  "hw3"
 4. html &lxml & web page & url
 5. requests get post and json 
 6. build virtualenv and build django and db
