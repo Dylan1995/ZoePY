@@ -40,13 +40,13 @@ for j in range(1,3):
     for i in range(1,9):
         temp = int(list1[i][j])
         cont = cont + temp
-        ave = cont / 8
+    ave = cont / 8
     aveGG.append(str(ave))
 
 print(aveGG)
-'''
-## calculate the value
 
+## calculate the value
+'''
 
 temp1 = 0
 cont1 = 0
@@ -131,8 +131,10 @@ avePerG =[str(BluePerG),str(fishPerG),str(HHPerG),str(ZoePerG),str(YenPerG),str(
 
 #print(avePerG)
 
-
+from prettytable import from_csv 
 fp = open("E:\zoePY\hw3\Data\Grade.csv", "r") 
+
+pt = csv.reader(fp)
 pt = from_csv(fp)
 pt.add_row(aveG)
 pt.add_column("個人平均",avePerG)
