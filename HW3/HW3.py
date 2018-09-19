@@ -31,23 +31,54 @@ for line in lines:
     #c = a + b
 
  
-'''
+
 ##not finish yet TT
-temp =0
-cont =0
+
 aveGG = ["平均"]
-for j in range(1,3):
+for j in range(1,4):
+    temp =0
+    cont =0
     for i in range(1,9):
+        
         temp = int(list1[i][j])
         cont = cont + temp
-    ave = cont / 8
-    aveGG.append(str(ave))
+        ave = cont/8
+        if i == 8:
+            aveGG.append(str(ave))
+    
+            
+       # '''
+        #if j == 1:
+         #   ave = cont / 8
+       # else:
+         #   ave = cont /(8*(j-1))
+       # '''
+    
+    #aveGG.append(str(cont))
 
 print(aveGG)
 
-## calculate the value
-'''
 
+
+
+avePPerG = []
+for j in range(1,9):
+    tempp = 0
+    contt = 0
+    for i in range(1,4):
+        
+        tempp = int(list1[j][i])
+        contt = contt + tempp
+        avePGG = contt / 3
+        if i == 3:
+            avePGG = round((avePGG)+0.01,2)
+            avePPerG.append(str(avePGG))
+print(avePPerG)
+
+
+## calculate the value
+
+'''
 temp1 = 0
 cont1 = 0
 
@@ -130,7 +161,7 @@ ShihPerG = round(cont11/3+0.001,2)
 avePerG =[str(BluePerG),str(fishPerG),str(HHPerG),str(ZoePerG),str(YenPerG),str(KaiPerG),str(XianPerG),str(ShihPerG),str(aveManEngMat)]
 
 #print(avePerG)
-
+'''
 from prettytable import from_csv 
 fp = open("E:\zoePY\hw3\Data\Grade.csv", "r") 
 
