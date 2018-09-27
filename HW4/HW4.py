@@ -4,11 +4,10 @@ Created on Thu Sep 20 14:21:18 2018
 
 @author: breezefay
 """
-
 import requests
 
+from lxml import etree
 import urllib
-
 
 def get_web_page(url):
     resp = requests.get(
@@ -21,13 +20,13 @@ def get_web_page(url):
     else:
         return resp.text
     
-a = input("input:")
+aa = input("input:")
 
-print("你搜尋的是:"+ a)
+print("你搜尋的是:"+ aa)
 
 #print(urllib.request.quote(a))
 
-a = urllib.request.quote(a)
+a = urllib.request.quote(aa)
 #a = urllib.quote(a.decode(sys.stdin.encoding).encode('utf8'))
 #print(a)
 
@@ -36,9 +35,20 @@ r = ("https://www.google.com.tw/search?q="+str(a)+"&oq="+str(a)+"&aqs=chrome..69
 print("你搜尋的網址是"+r)
 
 page = get_web_page(r)
-if page:
-	print(page)
+#soup = BeautifulSoup(page)
+
+#print(LC20lb.select('.LC20lb')[1].text)
+
+#x = soup.find_all("//a/@href")
+
+#print(x)
+#print(soup)
+sel = etree.HTML(page)
+
+for each in sel.xpath('//*[@id="ires"]/ol/div[position()>=0]/h3/a/text()'):
+    print(str(aa)+each)
+    for each in sel.xpath('//*[@id="ires"]/ol/div[2]/div/div/cite/text()'):
+        print(each)
     
-    
-   # https://www.google.com.tw/search?q=%E6%99%BA%E9%9A%9C&oq=%E6%99%BA%E9%9A%9C&aqs=chrome..69i57j69i60l2j0l3.3850j0j1&sourceid=chrome&ie=UTF-8
-#https://www.google.com.tw/search?q=%E6%99%BA%E9%9A%9C&oq=%E6%99%BA%E9%9A%9C&aqs=chrome..69i57j69i60l2.1775j0j1&sourceid=chrome&ie=UTF-8
+
+#xx = selectSite.select_by_value(cite)
