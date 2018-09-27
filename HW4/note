@@ -1,0 +1,43 @@
+###
+
+
+NOTE for HW4
+
+**requests 套件
+
+	這個套件是方便讓你去得到網址的結果
+**lxml套件
+
+	把你扒下來的資料做整理
+**URL Xpath
+
+	類似路徑的概念，要爬資料之前我們要知道路徑，所以要先了解路徑才可以開始寫摳
+
+	搜尋結果的URL，綠色的那條網址，要怎麼尋找他的URL呢
+
+	首先，Ctrl + Shift + C(選擇網頁元素)
+	再來，把鼠標放到你要找的那個綠色網址上
+
+	你會發現，在網頁原始碼上，已經顯示出你選擇要素的位置了並且反成藍色，這時候按右鍵複製Xpath
+
+**爬取搜尋結果的每個標題
+
+	這時候比較麻煩，畢竟有javascript干擾，推薦的作法是把javascript關掉，然後依照上面找URL Xpath的方式去
+	找標題的路徑，這次的作業就是這樣找到了，哈
+
+*****爬取網頁存在性問題
+
+	def get_web_page(url):
+
+		##這邊放cookies的原因是為甚麼呢? 第一，可能是18up的網頁，為了方便爬取，我們直接讓cookies大於18歲
+    	resp = requests.get(
+        	url=url,
+        	cookies={'over18': '1'}
+    	)
+    	##搜尋結果可以有兩種結果，有或者沒有這個網頁，也就是"200"跟"404"的問題，所以我們必須直接先把這部分排除
+
+    	if resp.status_code != 200:
+        	print('Invalid url:', resp.url)
+       		return None
+    	else:
+        	return resp.text
