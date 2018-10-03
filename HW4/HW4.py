@@ -45,10 +45,14 @@ page = get_web_page(r)
 #print(soup)
 sel = etree.HTML(page)
 
-for each in sel.xpath('//*[@id="ires"]/ol/div[position()>=0]/h3/a/text()'):
-    print(str(aa)+each)
-    for each in sel.xpath('//*[@id="ires"]/ol/div[2]/div/div/cite/text()'):
-        print(each)
+###可能要修改一下
+
+for i in sel.xpath('//*[@id="ires"]/ol/div[position()>=0]/h3/a/text()'):
+    print(str(aa)+i)
+    for j in sel.xpath('//*[@id="ires"]/ol/div[position()>=0]/div/div/cite/text()'):
+        print(j)
+    #for each in sel.xpath('//*[@id="ires"]/ol/div[position()]/div/div/cite/text()'):
+        #print(each)
     
 
 #xx = selectSite.select_by_value(cite)
