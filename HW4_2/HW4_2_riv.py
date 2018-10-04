@@ -1,7 +1,7 @@
 import re
 import requests
 import datetime
-#import json
+import json
 
 from lxml import etree
 
@@ -39,7 +39,7 @@ while True:
         for i in sel.xpath('//div[position()>0]/div[position()>0]/div[position()>0]'):
             ti_arc = i.xpath("//h2/a/text()")
             rev_dat = i.xpath("//label/text()")
-            url_add = i.xpath("//h2/a/@herf")
+            url_add = i.xpath('/a/@herf')
                 
             
             #print(url_add)
@@ -63,39 +63,25 @@ while True:
                 
                 #u = str(author+"\t" + str(cday))
                 dict2 = {}
-                dict2["url"] = str("url")
-                dict2["title"] = str(ti_arc)
-                dict2["author"] = author
+                dict2["url"] = url_add
+                dict2["title"] = str(ti_arc[0])
+                dict2["author"] = str(author)
                 dict2["date"] = str(cday)
                 
                 title.append(dict2)
 
-                '''
-                ini_li = ["","","",""]
-                
-                ini_li[0] = ("url"+":"+ str(url_add))
-                ini_li[1] = ("title"+":"+ str(ti_arc))
-                ini_li[2] = ("author"+":"+author)
-                ini_li[3] = ("date"+":"+str(cday))
-                
-                title.append(ini_li)
-                
-                #title = title.append(pppp)
-                #print(author+"\t" + str(cday))
-                print(title)
-                '''
                 
 
         
         page_num += 1
 print(title)
 
-'''
+
 title = json.dumps(title)
 fileObject = open('jsonFile.json', 'w')
 fileObject.write(title)
 fileObject.close()
-'''
+
     
         
    
