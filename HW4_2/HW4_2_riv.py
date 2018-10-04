@@ -1,7 +1,7 @@
 import re
 import requests
 import datetime
-import json
+#import json
 
 from lxml import etree
 
@@ -15,12 +15,15 @@ def get_web_page(url):
         return None
     else:
         return resp.text
-Mon_Mand = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
-Mon_Arab = ["1","2","3","4","5","6","7","8","9","10","11","12"]
+mon_mand = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"]
+mon_arab = ["1","2","3","4","5","6","7","8","9","10","11","12"]
   
-j = 1
+
 page_num = 1 
-while j == 1:
+title = []
+
+
+while True:
     index = str(page_num)
     
     Target_url = ("https://www.nuwainfo.com/zh/blog/?page="+ index + "#")
@@ -32,11 +35,14 @@ while j == 1:
 
     else:
         sel = etree.HTML(page)
-        title = []
-        for i in sel.xpath('/html/body/div[4]/div/div/div[1]/div[4]/div[position()>0]/div[position()>0]'):
+        
+        for i in sel.xpath('//div[position()>0]/div[position()>0]/div[position()>0]'):
             ti_arc = i.xpath("//h2/a/text()")
             rev_dat = i.xpath("//label/text()")
-            url_add = i.get("//h2/a/@herf")
+            url_add = i.xpath("//h2/a/@herf")
+                
+            
+            #print(url_add)
             
             
             for data in rev_dat:
@@ -45,38 +51,51 @@ while j == 1:
                 author = d[0][0]
                 date = d[0][1] # datetime.strptime("4 30, 2018", "%m %d, %Y")
                 
-                for mon in Mon_Mand:
+                for mon in mon_mand:
                     
                     if mon in date:
-                        i = Mon_Mand.index(mon)
-                        date = date.replace(mon ,Mon_Arab[i])
+                        i = mon_mand.index(mon)
+                        date = date.replace(mon ,mon_arab[i])
                     
 
                 cday = datetime.datetime.strptime(date, "%m %d, %Y")
                 
-                #u = str(author+"\t" + str(cday))
                 
+                #u = str(author+"\t" + str(cday))
+                dict2 = {}
+                dict2["url"] = str("url")
+                dict2["title"] = str(ti_arc)
+                dict2["author"] = author
+                dict2["date"] = str(cday)
+                
+                title.append(dict2)
+
+                '''
                 ini_li = ["","","",""]
                 
-                ini_li[0] = ("url"+":"+str(url_add))
+                ini_li[0] = ("url"+":"+ str(url_add))
                 ini_li[1] = ("title"+":"+ str(ti_arc))
                 ini_li[2] = ("author"+":"+author)
                 ini_li[3] = ("date"+":"+str(cday))
                 
                 title.append(ini_li)
+                
                 #title = title.append(pppp)
                 #print(author+"\t" + str(cday))
-                #print(title)
+                print(title)
+                '''
                 
 
         
         page_num += 1
+print(title)
 
+'''
 title = json.dumps(title)
 fileObject = open('jsonFile.json', 'w')
 fileObject.write(title)
 fileObject.close()
-
+'''
     
         
    
